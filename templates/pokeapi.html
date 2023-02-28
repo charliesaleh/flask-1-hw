@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/pokeapi" method="POST">
+    <div class="form-group">
+      <label for="name">Pokemon</label>
+      <input type="text" class="form-control" id="name" name="name">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+{% if pokemon_list %}
+<table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Abilities</th>
+        <th scope="col">Base Experience</th>
+        <th scope="col">Front Shiny URL</th>
+        <th scope="col">Attack Base Stat</th>
+        <th scope="col">HP Base Stat</th>
+        <th scope="col">Defense Base Stat</th>
+      </tr>
+    </thead>
+    <tbody>  
+        {% for pokemon in pokemon_list %}
+      <tr>
+        <th>{{pokemon.Name}}</th>
+        <td>{{pokemon.Abilities}}</td>
+        <td>{{pokemon.BaseExperience}}</td>
+        <td>{{pokemon.FrontShinyURL}}</td>
+        <td>{{pokemon.AttackBaseStat}}</td>
+        <td>{{pokemon.HPBaseStat}}</td>
+        <td>{{pokemon.DefenseBaseStat}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+{% endblock %}
+
