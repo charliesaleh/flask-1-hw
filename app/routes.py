@@ -18,7 +18,7 @@ def login():
         if email in app.config.get('REGISTERED_USERS') and password == app.config.get('REGISTERED_USERS').get(email).get('password'):
             return f'Successfully logged in! Hello, {app.config.get("REGISTERED_USERS").get(email).get("name")}'
         else:
-            error = 'Invalid email or password'
+            error = 'Invalid email or password!'
             return render_template('login.html', form=form, error=error)
     return render_template('login.html', form=form)
 
@@ -31,7 +31,7 @@ def sign_up():
         if email in app.config.get('UNREGISTERED_USERS') and password == app.config.get('UNREGISTERED_USERS').get(email).get('password'):
             return f'Successfully signed up! Hello, {app.config.get("UNREGISTERED_USERS").get(email).get("name")}'
         else:
-            error = 'Add a functioning email'
+            error = 'Add a functioning email!'
             return render_template('sign_up.html', form=form, error=error)
     return render_template('sign_up.html', form=form)
 
