@@ -15,7 +15,7 @@ def login():
         email = form.email.data.lower()
         password = form.password.data
         if email in app.config.get('REGISTERED_USERS') and password == app.config.get('REGISTERED_USERS').get(email).get('password'):
-            return f'Successfully logged in! Hello, {app.config.get("REGISTERED_USERS").get(email).get("name")}'
+            return f'Successfully logged in! Welcome back, {app.config.get("REGISTERED_USERS").get(email).get("name")}'
         else:
             error = 'Invalid email or password!'
             return render_template('login.html', form=form, error=error)

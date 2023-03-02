@@ -13,3 +13,32 @@
 .pokemon_sign_up_page{
     text-align: center;
 }
+
+/* .nav-link{
+    
+} */
+
+.nav-link{
+    font-size: 25px;
+    font-weight: bold;
+    
+}
+
+.btn-outline-success{
+    color: red;
+    border-color: red;
+}
+
+.animate__rotateIn{
+    width: 100px;
+}
+
+@-webkit-keyframes spin{
+    100%{-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes spin{
+    100%{-moz-transform: rotate(360deg);}
+}
+@keyframes spin{
+    100%{transform: rotate(360deg);}
+}
