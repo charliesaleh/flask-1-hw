@@ -31,7 +31,8 @@ def sign_up():
         if email in app.config.get('UNREGISTERED_USERS') and password == app.config.get('UNREGISTERED_USERS').get(email).get('password'):
             return f'Successfully signed up! Hello, {app.config.get("UNREGISTERED_USERS").get(email).get("name")}'
         else:
-            return render_template('sign_up.html', form=form)
+            error = 'Add a functioning email'
+            return render_template('sign_up.html', form=form, error=error)
     return render_template('sign_up.html', form=form)
 
 @app.route('/pokeapi', methods=['GET', 'POST'])

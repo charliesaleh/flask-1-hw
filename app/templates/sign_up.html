@@ -5,17 +5,21 @@ Sign Up
 {% endblock %}
 
 {% block content %}
-<h1>Sign Up</h1>
+<br>
+<h1 class="pokemon_sign_up_page">Sign Up</h1>
+<br>
 <form action="{{url_for('sign_up')}}" method="POST">
     {{form.hidden_tag()}}
     <div class="form-group">
       {{form.email.label()}}
       {{form.email(class='form-control')}}
     </div>
+    <br>
     <div class="form-group">
       {{form.password.label()}}
       {{form.password(class='form-control')}}
     </div>
+    <br>
     {{form.submit_btn(class='btn btn-primary')}}
     <div style="color:red">
       <small>{{error}}</small>

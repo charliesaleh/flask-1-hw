@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Pokemon
+Pokeapi
 {% endblock %}
 
 {% block content %}
-  <h1>Pokemon Page</h1>
+<br>
+  <h1 class="pokemon_pokeapi_page">Pokemon Page</h1>
+  <br>
   <form action="/pokeapi" method="POST">
       {{form.hidden_tag()}}
       <div class="form-group">
         {{form.pokemon_names.label()}}
         {{form.pokemon_names(class="form-control")}}
       </div>
+      <br>
       {{form.submit_btn(class='btn btn-primary')}}
       <div style="color:red">
         <small>{{error}}</small>
@@ -25,7 +28,7 @@ Pokemon
             <th scope="col">Name</th>
             <th scope="col">Abilities</th>
             <th scope="col">Base Experience</th>
-            <th scope="col">Front Shiny URL</th>
+            <th scope="col">Front Shiny Image</th>
             <th scope="col">Attack Base Stat</th>
             <th scope="col">HP Base Stat</th>
             <th scope="col">Defense Base Stat</th>
@@ -33,8 +36,8 @@ Pokemon
         </thead>
         <tbody>
           <tr>
-            <td>{{get_pokemon_info["Name"]}}</td>
-            <td>{{get_pokemon_info["Abilities"]}}</td>
+            <td>{{get_pokemon_info["Name"].title()}}</td>
+            <td>{{get_pokemon_info["Abilities"].title()}}</td>
             <td>{{get_pokemon_info["BaseExperience"]}}</td>
             <td><img src="{{get_pokemon_info['FrontShinyURL']}}"></td>
             <td>{{get_pokemon_info["AttackBaseStat"]}}</td>
