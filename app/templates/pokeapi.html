@@ -12,10 +12,13 @@ Pokemon
         {{form.pokemon_names.label()}}
         {{form.pokemon_names(class="form-control")}}
       </div>
-      {{form.submit_btn(class="btn btn-primary")}}
+      {{form.submit_btn(class='btn btn-primary')}}
+      <div style="color:red">
+        <small>{{error}}</small>
+      </div>
     </form>
   
-  {% if get_pokemon_info %}
+    {% if get_pokemon_info %}
     <table class="table table-dark">
         <thead>
           <tr>
@@ -29,17 +32,16 @@ Pokemon
           </tr>
         </thead>
         <tbody>
-          {% for pokemon in get_pokemon_info.values() %}
           <tr>
-            <th scope="row">{{pokemon}}</th>
-            <td scope="row">{{'Abilities'}}</td>
-            <td scope="row">{{'BaseExperience'}}</td>
-            <td scope="row">{{'FrontShinyURL'}}</td>
-            <td scope="row">{{'AttackBaseStat'}}</td>
-            <td scope="row">{{'HPBaseStat'}}</td>
-            <td scope="row">{{'DefenseBaseStat'}}</td>
+            <td>{{get_pokemon_info["Name"]}}</td>
+            <td>{{get_pokemon_info["Abilities"]}}</td>
+            <td>{{get_pokemon_info["BaseExperience"]}}</td>
+            <td><img src="{{get_pokemon_info['FrontShinyURL']}}"></td>
+            <td>{{get_pokemon_info["AttackBaseStat"]}}</td>
+            <td>{{get_pokemon_info["HPBaseStat"]}}</td>
+            <td>{{get_pokemon_info["DefenseBaseStat"]}}</td>
           </tr>
-          {% endfor %}
+
         </tbody>
       </table>
   {% endif %}

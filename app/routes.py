@@ -1,6 +1,6 @@
 from flask import render_template, request
 import requests
-from app.forms import PokemonForm
+from app.forms import PokemonForm, LoginForm, SignUpForm
 from app import app
 
 # ROUTES SECTION
@@ -9,7 +9,30 @@ from app import app
 def home():
     return render_template('home.html')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        email = form.email.data.lower()
+        password = form.password.data
+        if email in app.config.get('REGISTERED_USERS') and password == app.config.get('REGISTERED_USERS').get(email).get('password'):
+            return f'Successfully logged in! Hello, {app.config.get("REGISTERED_USERS").get(email).get("name")}'
+        else:
+            error = 'Invalid email or password'
+            return render_template('login.html', form=form, error=error)
+    return render_template('login.html', form=form)
 
+@app.route('/sign_up', methods=['GET', 'POST'])
+def sign_up():
+    form = SignUpForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        email = form.email.data.lower()
+        password = form.password.data
+        if email in app.config.get('UNREGISTERED_USERS') and password == app.config.get('UNREGISTERED_USERS').get(email).get('password'):
+            return f'Successfully signed up! Hello, {app.config.get("UNREGISTERED_USERS").get(email).get("name")}'
+        else:
+            return render_template('sign_up.html', form=form)
+    return render_template('sign_up.html', form=form)
 
 @app.route('/pokeapi', methods=['GET', 'POST'])
 def pokeapi():
@@ -34,5 +57,6 @@ def pokeapi():
             print(get_pokemon_info)
             return render_template('pokeapi.html', get_pokemon_info=get_pokemon_info, form=form)
         else:
-            return "This pokemon does not exist"
+            error = "This pokemon does not exist"
+            return render_template('pokeapi.html', form=form, error=error)
     return render_template('pokeapi.html', form=form)
