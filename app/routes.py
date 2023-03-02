@@ -4,7 +4,6 @@ from app.forms import PokemonForm, LoginForm, SignUpForm
 from app import app
 
 # ROUTES SECTION
-
 @app.route('/', methods=['GET'])
 def home():
     return render_template('home.html')
