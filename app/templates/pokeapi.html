@@ -6,7 +6,13 @@ Pokeapi
 
 {% block content %}
 <br>
-  <h1 class="pokemon_pokeapi_page"><img src="https://previews.dropbox.com/p/thumb/AB2iYhluqWOdxWDD-Y_tk27ND7rk5fY4YzHGdIrOypQ4mTxMA5w_KA8j0CvDo5kWN6ePuYFRu-dii_oGb1zX_kh5eGUOQmVXaSu86LEs-RzzmMNOC91PKxnIDhBIidwJnbTvqj34KjQj3lcNIrucSSnw12xeDHJSYp6XnCzRBuSQNVRMAL3Pm7-2-v5KwQgVq9ZzQdC49pthQD8yHhwZFcEs_2gbTkGcpEqKI1ccN4AkN13EqFr-FwukIupRY3FuJTZmAL1ZmjGkhJvZibK_roRT0WcCA-AiGzqH0kh2PqIzL3y2jJ-0bKOOs0m1OtIc8cBva8JPHAREa10dOoEF3cjHUx80l-NTNtgYuUNbAlc-r5zJJu0yC6bMQHXLYPcGc4s/p.png" alt=""></h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <h1 class="pokemon_pokeapi_page"><img class="pokemon_pokeapi" src="https://previews.dropbox.com/p/thumb/AB2iYhluqWOdxWDD-Y_tk27ND7rk5fY4YzHGdIrOypQ4mTxMA5w_KA8j0CvDo5kWN6ePuYFRu-dii_oGb1zX_kh5eGUOQmVXaSu86LEs-RzzmMNOC91PKxnIDhBIidwJnbTvqj34KjQj3lcNIrucSSnw12xeDHJSYp6XnCzRBuSQNVRMAL3Pm7-2-v5KwQgVq9ZzQdC49pthQD8yHhwZFcEs_2gbTkGcpEqKI1ccN4AkN13EqFr-FwukIupRY3FuJTZmAL1ZmjGkhJvZibK_roRT0WcCA-AiGzqH0kh2PqIzL3y2jJ-0bKOOs0m1OtIc8cBva8JPHAREa10dOoEF3cjHUx80l-NTNtgYuUNbAlc-r5zJJu0yC6bMQHXLYPcGc4s/p.png" alt=""></h1>
   <br>
   <form action="/pokeapi" method="POST">
       {{form.hidden_tag()}}
@@ -20,11 +26,11 @@ Pokeapi
         <small>{{error}}</small>
       </div>
     </form>
-  
+  <br>
     {% if get_pokemon_info %}
-    <table class="table table-dark">
+    <table class="table">
         <thead>
-          <tr>
+          <tr class="column">
             <th scope="col">Name</th>
             <th scope="col">Abilities</th>
             <th scope="col">Base Experience</th>
@@ -35,18 +41,24 @@ Pokeapi
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="data">
             <td>{{get_pokemon_info["Name"].title()}}</td>
             <td>{{get_pokemon_info["Abilities"].title()}}</td>
             <td>{{get_pokemon_info["BaseExperience"]}}</td>
-            <td><img src="{{get_pokemon_info['FrontShinyURL']}}"></td>
+            <td><img class="pokemon_img" src="{{get_pokemon_info['FrontShinyURL']}}"></td>
             <td>{{get_pokemon_info["AttackBaseStat"]}}</td>
             <td>{{get_pokemon_info["HPBaseStat"]}}</td>
             <td>{{get_pokemon_info["DefenseBaseStat"]}}</td>
           </tr>
-
         </tbody>
       </table>
   {% endif %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 {% endblock %}
 

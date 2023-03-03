@@ -1,7 +1,10 @@
-from flask import render_template, request
+from flask import render_template, request, flash, redirect, url_for
 import requests
-from app.forms import PokemonForm, LoginForm, SignUpForm
+from app.forms import PokemonForm, LoginForm, RegistrationForm
+from app.models import User
 from app import app
+from werkzeug.security import check_password_hash
+from flask_login import login_user, current_user, logout_user
 
 # ROUTES SECTION
 @app.route('/', methods=['GET'])
@@ -14,25 +17,47 @@ def login():
     if request.method == 'POST' and form.validate_on_submit():
         email = form.email.data.lower()
         password = form.password.data
-        if email in app.config.get('REGISTERED_USERS') and password == app.config.get('REGISTERED_USERS').get(email).get('password'):
-            return f'Successfully logged in! Welcome back, {app.config.get("REGISTERED_USERS").get(email).get("name")}'
+        
+        # Query from our db
+        queried_user = User.query.filter_by(email=email).first()
+        if queried_user and check_password_hash(queried_user.password, password):
+            login_user(queried_user)
+            flash(f'Successfully logged in! Welcome back, {queried_user.first_name}!', 'success')
+            login_user(queried_user)
+            return redirect(url_for('home'))
         else:
-            error = 'Invalid email or password!'
-            return render_template('login.html', form=form, error=error)
+            error ='Invalid email or password'
+            flash(error, 'danger')
+            return render_template('login.html', form=form)
     return render_template('login.html', form=form)
 
-@app.route('/sign_up', methods=['GET', 'POST'])
-def sign_up():
-    form = SignUpForm()
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    if current_user:
+        logout_user()
+        flash(f'Successfully logged out!', 'warning')
+        return redirect(url_for('login'))
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
     if request.method == 'POST' and form.validate_on_submit():
-        email = form.email.data.lower()
-        password = form.password.data
-        if email in app.config.get('UNREGISTERED_USERS') and password == app.config.get('UNREGISTERED_USERS').get(email).get('password'):
-            return f'Successfully signed up! Hello, {app.config.get("UNREGISTERED_USERS").get(email).get("name")}'
-        else:
-            error = 'Add a functioning email!'
-            return render_template('sign_up.html', form=form, error=error)
-    return render_template('sign_up.html', form=form)
+        # Grabbimg our form data and store it into dict
+        new_user_data = {
+            'first_name': form.first_name.data.title(),
+            'last_name': form.last_name.data.title(),
+            'email': form.email.data.lower(),
+            'password': form.password.data
+        }
+        #Create instance of our user
+        new_user = User()
+        # Impletemening values from out form data for our instance
+        new_user.from_dict(new_user_data)
+        #Save to our database
+        new_user.save_to_db()
+        flash('You have successfully registered!', 'success')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
 
 @app.route('/pokeapi', methods=['GET', 'POST'])
 def pokeapi():

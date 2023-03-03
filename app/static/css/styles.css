@@ -1,44 +1,117 @@
 .pokemon_home_page{
     text-align: center;
-}
-
-.pokemon_login_page{
-    text-align: center;
+    border-radius: 40px;
+    border: 8px solid white;
+    height: 900px;
 }
 
 .pokemon_pokeapi_page{
     text-align: center;
+    border-radius: 40px;
+    border: 8px solid white;
+    height: 900px;
 }
 
-.pokemon_sign_up_page{
+.pokemon_register_page{
     text-align: center;
+    border-radius: 40px;
+    border: 8px solid white;
+    height: 900px;
 }
 
-/* .nav-link{
-    
-} */
+.box{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-radius: 40px;
+    border: 8px solid white;
+    height: 900px;
+    width: 100% min();
+    flex-shrink: 5;
+    margin: 110px;
+    align-items: center;
+    background-color: #3466AF;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 5;
+}
+
+.pokemon_register{
+    width: 700px;
+}
+
+.pokemon_pokeapi{
+    width: 700px;
+}
+.form-group{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.form-control{
+    border-color: black;
+
+}
 
 .nav-link{
     font-size: 25px;
     font-weight: bold;
-    
+    color: white;
+}
+
+.column, .data{
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+}
+
+.pokemon_img{
+    width: 50%;
+}
+
+.table{
+    border-color: white;
+    background-color: #3466AF;
+    border-style: solid;
 }
 
 .btn-outline-success{
-    color: red;
-    border-color: red;
+    color: white;
+    border-color: black;
+    border-style: solid;
+    background-color: red;
+    
+}
+
+.btn-primary{
+    color: white;
+    border-color: black;
+    border-style: solid;
+    background-color: red;
+    width: 100%;
+    padding: 10px;
+    flex-shrink: 1;
+    align-content: center;
+}
+
+body{
+    background-color: #FFCB05;
+}
+
+.container-fluid{
+    background-color: #3466AF;
 }
 
 .animate__rotateIn{
     width: 100px;
 }
 
-@-webkit-keyframes spin{
-    100%{-webkit-transform: rotate(360deg);}
+.form-control{
+    flex-shrink: 1;
+    padding: 10px;
+    /* margin-left: 350px; */
 }
-@-moz-keyframes spin{
-    100%{-moz-transform: rotate(360deg);}
-}
-@keyframes spin{
-    100%{transform: rotate(360deg);}
-}
+
