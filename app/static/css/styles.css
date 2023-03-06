@@ -6,7 +6,6 @@
     border: 8px solid white;
     height: 900px;
     width: 100% min(100%);
-    flex-shrink: 5;
     margin: 110px;
     align-items: center;
     background-color: #3466AF;
@@ -14,9 +13,9 @@
 }
 
 .center{
+    display: flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 5;
 }
 
 .pokemon_register{
@@ -65,7 +64,6 @@
     border-color: black;
     border-style: solid;
     background-color: red;
-    
 }
 
 .btn-primary{
@@ -76,6 +74,17 @@
     width: 100%;
     padding: 10px;
     flex-shrink: 1;
+    align-content: center;
+}
+
+.icons{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.btn-primary1{
     align-content: center;
 }
 
@@ -106,4 +115,10 @@ body{
 
 .pokeball2{
     width: 150px;
+}
+
+.video{
+    justify-content: right;
+    align-items: right;
+    width: 500px;
 }
