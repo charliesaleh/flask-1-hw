@@ -19,7 +19,7 @@ Pokeapi
 <div class>
 <img class="pokemon" src="https://previews.dropbox.com/p/thumb/AB2iYhluqWOdxWDD-Y_tk27ND7rk5fY4YzHGdIrOypQ4mTxMA5w_KA8j0CvDo5kWN6ePuYFRu-dii_oGb1zX_kh5eGUOQmVXaSu86LEs-RzzmMNOC91PKxnIDhBIidwJnbTvqj34KjQj3lcNIrucSSnw12xeDHJSYp6XnCzRBuSQNVRMAL3Pm7-2-v5KwQgVq9ZzQdC49pthQD8yHhwZFcEs_2gbTkGcpEqKI1ccN4AkN13EqFr-FwukIupRY3FuJTZmAL1ZmjGkhJvZibK_roRT0WcCA-AiGzqH0kh2PqIzL3y2jJ-0bKOOs0m1OtIc8cBva8JPHAREa10dOoEF3cjHUx80l-NTNtgYuUNbAlc-r5zJJu0yC6bMQHXLYPcGc4s/p.png" alt="">
   <br>
-  <form action="/pokeapi" method="POST">
+  <form action="{{url_for('main.pokeapi')}}" method="POST">
       {{form.hidden_tag()}}
       <div class="form-group">
         {{form.pokemon_names.label()}}

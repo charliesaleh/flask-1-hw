@@ -12,6 +12,10 @@
     color: white;
 }
 
+.pokemon{
+    width: 500px;
+}
+
 .center{
     display: flex;
     justify-content: center;
@@ -25,6 +29,12 @@
 .pokemon_pokeapi{
     width: 700px;
 }
+
+.pokemon{
+    width: 450px;
+}
+
+
 .form-group{
     font-weight: bold;
     font-size: 20px;
@@ -32,11 +42,10 @@
 
 .form-control{
     border-color: black;
-
 }
 
 .nav-link{
-    font-size: 25px;
+    font-size: 23px;
     font-weight: bold;
     color: white;
 }

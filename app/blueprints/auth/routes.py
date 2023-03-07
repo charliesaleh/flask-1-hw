@@ -1,17 +1,11 @@
 from flask import render_template, request, flash, redirect, url_for
-import requests
-from app.forms import PokemonForm, LoginForm, RegistrationForm
+from app.blueprints.auth.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.blueprints.auth import auth
 from app.models import User
-from app import app
 from werkzeug.security import check_password_hash
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 
-# ROUTES SECTION
-@app.route('/', methods=['GET'])
-def home():
-    return render_template('home.html')
-
-@app.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if request.method == 'POST' and form.validate_on_submit():
@@ -24,21 +18,21 @@ def login():
             login_user(queried_user)
             flash(f'Successfully logged in! Welcome back, {queried_user.first_name}!', 'success')
             login_user(queried_user)
-            return redirect(url_for('home'))
+            return redirect(url_for('main.home'))
         else:
             error ='Invalid email or password'
             flash(error, 'danger')
             return render_template('login.html', form=form)
     return render_template('login.html', form=form)
 
-@app.route('/logout', methods=['GET', 'POST'])
+@auth.route('/logout', methods=['GET', 'POST'])
 def logout():
     if current_user:
         logout_user()
         flash(f'Successfully logged out!', 'warning')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
-@app.route('/register', methods=['GET', 'POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if request.method == 'POST' and form.validate_on_submit():
@@ -56,32 +50,33 @@ def register():
         #Save to our database
         new_user.save_to_db()
         flash('You have successfully registered!', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
     return render_template('register.html', form=form)
 
-@app.route('/pokeapi', methods=['GET', 'POST'])
-def pokeapi():
-    form = PokemonForm()
-    print(request.method)
+@auth.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
     if request.method == 'POST' and form.validate_on_submit():
-        pokemon_name = form.pokemon_names.data
-        print(pokemon_name)
-        url = f'https://pokeapi.co/api/v2/pokemon/{pokemon_name}'
-        response = requests.get(url)
-        if response.ok:
-            pokemon = response.json()
-            get_pokemon_info = {
-                "Name": pokemon["name"],
-                "Abilities": pokemon["abilities"][0]['ability']['name'],
-                "BaseExperience": pokemon["base_experience"],
-                "FrontShinyURL": pokemon["sprites"]["front_shiny"],
-                "AttackBaseStat": pokemon["stats"][1]["base_stat"],
-                "HPBaseStat": pokemon["stats"][0]["base_stat"],
-                "DefenseBaseStat": pokemon["stats"][2]["base_stat"],
-                }
-            print(get_pokemon_info)
-            return render_template('pokeapi.html', get_pokemon_info=get_pokemon_info, form=form)
+
+        new_user_data = {
+            'first_name': form.first_name.data.title(),
+            'last_name': form.last_name.data.title(),
+            'email': form.email.data.lower(),
+        }
+
+        # query current user from db to change
+        queried_user = User.query.filter_by(email=new_user_data['email']).first()
+
+        # check if queried_user already exists
+        if queried_user:
+            flash('Email is already in use.', 'danger')
+            return redirect(url_for('auth.edit_profile'))
         else:
-            error = "This pokemon does not exist"
-            return render_template('pokeapi.html', form=form, error=error)
-    return render_template('pokeapi.html', form=form)
+           # add changes to db
+           current_user.update_from_dict(new_user_data)
+           current_user.save_to_db()
+           flash('Profile Updated!', 'success')
+           return redirect(url_for('main.home'))
+
+    return render_template('edit_profile.html', form=form)

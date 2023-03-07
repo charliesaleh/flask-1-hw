@@ -18,16 +18,16 @@ Register
   <br>
   <div>
   <img class="pokemon" src="https://previews.dropbox.com/p/thumb/AB3S6Tm7DvZAPi0gKWAhKw7nYPOJYbrtq6VB_Ze4d71tYa6SyUQ5yHCcrKgB58qR9X-dIOo_iiHqMyyj0XHRk_6gP4MQpUZRAxIcAsbnRah5uU9EEVgbF9BgqR5YT9L3ebKaj45dBh7hbDZNLoqjDhzHma2LqD9iyEOEyYrAX3rNJtasanKm7cAKLz0Tj2a534Z2XoREJn3RcZ6LkhMpv35KcY1HpYMkwBmhJc4Sfaf1fAeO3EVYTOxc0DG3iID0aeaJxZ_uqYWN-rkPEsC91VM0K6lDioxlpwlkzCpO1kka_QqaJZSlQuUui7084sKtwmBP2D_lEXcaY5tHYafZ6_TfViUkAUo19ES6oQWed2NzWY8SuQ0nLM1rhFxcClSaP4Y/p.png" alt="">
-<form action="{{url_for('register')}}" method="POST">
+<form action="{{url_for('auth.register')}}" method="POST">
     {{form.hidden_tag()}}
     <div class="form-group">
       {{form.first_name.label()}}
-      {{form.first_name(class='form-control', placeholder='Enter First name')}}
+      {{form.first_name(class='form-control', placeholder='Enter First Name')}}
     </div>
     <br>
     <div class="form-group">
         {{form.last_name.label()}}
-        {{form.last_name(class='form-control', placeholder='Enter Last name')}}
+        {{form.last_name(class='form-control', placeholder='Enter Last Name')}}
       </div>
       <br>
       <div class="form-group">
