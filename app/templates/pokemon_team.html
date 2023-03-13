@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<img class="" src="https://previews.dropbox.com/p/thumb/AB09EhByJDGQfkKgObBuQ1dXLTZaIkv_Vc_sD7aOXB5CILR3z04sn3ZZDup_UiuxSnMz2u1XgY3Jhge4tc78xZlNt_w0cbCOkwjb-DLGBowlNyfUBoyHHZgtXdlHfKV46WWp0v2wpsEdjfjM9UJaMaSI-n1H45RqkhiApLtDtajot48F6ciGaplXgj31fhxAFgzTsCg_WTtOYjW7OCFjbV3EyWiE9XeLlh2zCad_CsG227_5CKCpR2AhJDa4_fj6Pst9tZQX5f77N1N07zJzg8ChoRbELdVlUMd5aNx5UBXiVxCDhJax8UrkuOhwgW52o6xv32qid3Nfiegg8nzxUF2KQnItql-6gm2HgeBNALO-rlAIRDptBYPtiXDCPI5HUeg/p.png" alt="">
+<hr>
+<br>
+<br>
+{% for pokemon in pokemons %}
+    <div class="card text-white bg-dark mb-3" style="width: 20rem;">
+      <img class="card-img-top" src="{{pokemon.FrontShinyURL}}" class="Card image cap" alt="{{pokemon.Name}}">
+      <div class="card-body">
+        <h5 class="card-title">{{pokemon.Name}}</h5>
+        <p class="card-text">Abilities: {{pokemon.Abilities}}</p>
+        <p class="card-text">Base Experience: {{pokemon.BaseExperience}}</p>
+        <p class="card-text">Attack Base Stat: {{pokemon.AttackBaseStat}}</p>
+        <p class="card-text">HP Base Stat: {{pokemon.HPBaseStat}}</p>
+        <p class="card-text">Defense Base Stat: {{pokemon.DefenseBaseStat}}</p>
+        <a href="{{url_for('main.remove_pokemon', pokemon_id=pokemon.id)}}" class="btn btn-danger">Remove</a>
+      </div>
+    </div>
+    <br>
+  {% endfor %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

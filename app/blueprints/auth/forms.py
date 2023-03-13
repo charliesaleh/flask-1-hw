@@ -7,6 +7,7 @@ from app.models import User
 class PokemonForm(FlaskForm):
     pokemon_names = StringField('Name:', validators=[DataRequired()])
     submit_btn = SubmitField('Submit')
+    catch = SubmitField('Catch')
     
 class LoginForm(FlaskForm):
     email = EmailField('Email:', validators=[DataRequired()])
@@ -27,3 +28,21 @@ class EditProfileForm(FlaskForm):
     email = EmailField('Email:', validators=[DataRequired()])
     submit_btn = SubmitField('Update')
     
+class PokemonCaughtForm(FlaskForm):
+    pokemon_name = StringField('Pokemon Name', validators=[DataRequired()])
+    submit_btn = SubmitField('Submit')
+    catch = SubmitField('Catch')
+    
+class PokemonTeamForm(FlaskForm):
+    Name = StringField('Name', validators=[DataRequired()])
+    Abilities = StringField('Abilities', validators=[DataRequired()])
+    BaseExperience = StringField('Base Experience', validators=[DataRequired()])
+    FrontShinyURL = StringField('Front Shiny URL', validators=[DataRequired()])
+    AttackBaseStat = StringField('Attack Base Stat', validators=[DataRequired()])
+    HPBaseStat = StringField('HP Base Stat', validators=[DataRequired()])
+    DefenseBaseStat = StringField('Defense Base Stat', validators=[DataRequired()])
+    submit_btn = SubmitField('Add Pokemon')
+    
+class PokemonBattleForm(FlaskForm):
+    opponent_email = EmailField('Opponent Email:', validators=[DataRequired()])
+    submit_btn = SubmitField('Battle Pokemon')

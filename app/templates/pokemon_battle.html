@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<br>
+<br>
+  <div class="container mt-5">
+    <img class="" src="https://previews.dropbox.com/p/thumb/AB0kUuXC1NX-LFoaPTjUXJqcVeogK8iK4xS7vY2H9Pn74jo80kwu-Rpj43k1jF51UNGKg8UqQYGfoAqqVLKaawLwizgEsecjfHTo0woQdbkLCB3Jhm7ACccyL2s62nvGUGh6bKwkHk2P65lInh10LvjyBAfmpxoYFaqtouIR-4gVlOD-qXF2Im-wubltKj8XlrbNtXwKWwWR3d738visYf7zp59tgjVn4EaLgY_Fukpo_SLWP8BEitbkaqGuNTjl7WxgQzPlK_LwGta2BustSTx11YmObki7bXVFp296MZ5wE4oA8QVTaabCsp06b7rrhooo8QW9vUf1q8BB7qLtsFe8rP4-bL7D6yQ6bKeE809VeijFsQK2yBaN_yeTYn5BOes/p.png" alt="">
+    <hr>
+    <form method="post">
+      {{form.csrf_token}}
+      <div class="form-group">
+        {{form.opponent_email.label(class="font-weight-bold")}}
+        {{form.opponent_email(class="form-control")}}
+        {% if form.opponent_email.errors %}
+          {% for error in form.opponent_email.errors %}
+            <span class="text-danger">{{error}}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% if opponent %}
+      <h3 class="mt-5">Opponent: {{opponent.first_name}}</h3>
+      <table class="table mt-3">
+        <thead>
+          <tr>
+            <th>Pokemon</th>
+            <th>HP</th>
+            <th>Attack</th>
+            <th>Defense</th>
+            <th>Total Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{current_user.pokemon_catch.first().PokemonName}}</td>
+            <td>{{current_user.pokemon_catch.first().HPBaseStat}}</td>
+            <td>{{current_user.pokemon_catch.first().AttackBaseStat}}</td>
+            <td>{{current_user.pokemon_catch.first().DefenseBaseStat}}</td>
+            <td>{{current_user.pokemon_catch.first().HPBaseStat + current_user.pokemon_catch.first().AttackBaseStat + current_user.pokemon_catch.first().DefenseBaseStat}}</td>
+          </tr>
+          <tr>
+            <td>{{opponent.pokemon_catch.first().PokemonName}}</td>
+            <td>{{opponent.pokemon_catch.first().HPBaseStat}}</td>
+            <td>{{opponent.pokemon_catch.first().AttackBaseStat}}</td>
+            <td>{{opponent.pokemon_catch.first().DefenseBaseStat}}</td>
+            <td>{{opponent.pokemon_catch.first().HPBaseStat + opponent.pokemon_catch.first().AttackBaseStat + opponent.pokemon_catch.first().DefenseBaseStat}}</td>
+          </tr>
+        </tbody>
+      </table>
+      {% if winner == current_user.pokemon_catch.first() %}
+        <h4 class="text-success mt-5">You won the battle!</h4>
+      {% elif winner == opponent.pokemon_catch.first() %}
+        <h4 class="text-danger mt-5">You lost the battle!</h4>
+      {% else %}
+        <h4 class="text-info mt-5">The battle resulted in a draw!</h4>
+        {% endif %}
+        {% endif %}
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+        {% endblock %}

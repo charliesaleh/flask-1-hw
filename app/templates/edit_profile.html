@@ -10,16 +10,11 @@ Edit Profile
 <br>
 <br>
 <br>
-<br>
 <div class="box">
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
   <div>
   <img class="pokemon" src="https://previews.dropbox.com/p/thumb/AB3dX_FK5J6F0V1DNu74UkytAwLrcHeldSWBM52YAXHnG_EF5u0neiZHncziYSgWYPPnXxdPnHziFQ62W7T_M_6EqThWzQgMeKfELNuq1l8qGRzNWa34BHQ4_0Dk3WFe4f_bubHDgPmPjPEZwOY407HT4jqhgc5KuctHrQBH5Ezzga0AqQzw2uswBvCN2XBYLsd5U2OmfRUNwpETWBuh9va22UF9w8f57OhAv6Tf8T-3IQktPfHSczPmyYECHUgm-F_Nr6qC1H5_QHc5cdXlCiOIt6PVupGTd3zC3Ld161tiUrjNXzcWPE8RzAlmTAw3GuC4MXEt6omu0IucK4V7xdAerUB27VzDLYMVPWgnYXvbiwdYjQ6VXcydKbn7sdP01SQ/p.png" alt="">
-<form action="{{url_for('auth.edit_profile')}}" method="POST">
+  <hr>
+  <form action="{{url_for('auth.edit_profile')}}" method="POST">
     {{form.hidden_tag()}}
     <div class="form-group">
       {{form.first_name.label()}}

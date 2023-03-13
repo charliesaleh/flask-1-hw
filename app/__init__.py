@@ -3,11 +3,13 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_moment import Moment
 
 # Initializing Packages
 login = LoginManager()
 db = SQLAlchemy()
 migrate = Migrate()
+moment = Moment()
 
 def create_app():
     # Init app
@@ -20,6 +22,7 @@ def create_app():
     login.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
+    moment.init_app(app)
 
     # Configure Login Settings
     login.login_view = 'auth.login'
@@ -27,8 +30,8 @@ def create_app():
     login.login_message_category = 'warning'
 
     # Importing Blueprints
-    from .blueprints.main import main
-    from .blueprints.auth import auth
+    from app.blueprints.main import main
+    from app.blueprints.auth import auth
 
     # Register Blueprints
     app.register_blueprint(main)

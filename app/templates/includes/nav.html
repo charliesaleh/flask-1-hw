@@ -10,6 +10,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{url_for('main.pokeapi')}}">PokeAPI</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('main.pokemon_team')}}">View Pokemon Team</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('main.pokemon_battle')}}">Battle other Pokemons</a>
+              </li>
             {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="{{url_for('auth.login')}}">Login</a>
